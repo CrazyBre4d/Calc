@@ -1,27 +1,28 @@
 package org.example;
+
 import org.example.util.Calculator;
 import java.lang.*;
 
 public class Main {
     public static void main(String[] args) {
-
-        double[] numbers = new double[args.length];
-        double res;
-
         try {
+            if (args.length > 3) {
+            throw new ArrayIndexOutOfBoundsException("Enter 3 numbers!");
+            }
+
+            double[] numbers = new double[args.length];
+            double res=0;
+
             for (int i = 0; i < args.length; i++) {
                 numbers[i] = Double.parseDouble(args[i]);
             }
 
-            int operator = (int) numbers[0];
             double operand1 = numbers[1];
             double operand2 = numbers[2];
+            int operator = (int) numbers[0];
 
-            if (args.length > 3) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-            if (numbers[2] == 0) {
-                throw new ArithmeticException ();
+            if (operand2 == 0) {
+                throw new ArithmeticException("Can't divide by zero!");
             }
 
             switch (operator) {
@@ -40,15 +41,12 @@ public class Main {
                 default:
                     throw new IllegalArgumentException("Enter number from 1 to 4!");
             }
-            System.out.println("=" + res);
-
-        } catch (NumberFormatException e) {
+            String total = String.format("= %f", res);
+            System.out.println(total);
+        }   catch (NumberFormatException e) {
             System.out.println("Enter A NUMBER OR USE DOT!");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Enter 3 NUMBERS!");
-        }
-          catch (ArithmeticException e) {
-              System.out.println("Can't divide by zero!");
+        }   catch (ArrayIndexOutOfBoundsException | ArithmeticException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
