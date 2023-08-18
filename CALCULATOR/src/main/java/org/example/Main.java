@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             if (args.length > 3) {
-            throw new ArrayIndexOutOfBoundsException("Enter 3 numbers!");
+            throw new IllegalArgumentException("Enter 3 numbers!");
             }
 
             double[] numbers = new double[args.length];
